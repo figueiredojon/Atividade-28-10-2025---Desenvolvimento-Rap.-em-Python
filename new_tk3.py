@@ -31,18 +31,29 @@ def carregar_selecionado_no_campo(event=None):
         return
     valores = tabela.item(sel[0], "values")
     registro_atual_id = int(valores[0])
+    
     entrada_nome.delete(0, tk.END)
     entrada_nome.insert(0, valores[1])
+    
+    entrada_endereco.delete(0, tk.END)
+    entrada_endereco.insert(0, valores[2])
+    
+    entrada_cep.delete(0, tk.END)
+    entrada_cep.insert(0, valores[3])
+    
     atualizar_botoes()
 
 def novo():
     
     global registro_atual_id
     registro_atual_id = None
+    
     entrada_nome.delete(0, tk.END)
     entrada_nome.focus()
+    
     entrada_endereco.delete(0, tk.END)
     entrada_endereco.focus()
+    
     entrada_cep.delete(0, tk.END)
     entrada_cep.focus()
     tabela.selection_remove(*tabela.selection())
@@ -87,12 +98,12 @@ def editar():
     entrada_nome.insert(0, valores[1])
     entrada_nome.focus()
     #Editar Endereço
-    entrada_endereco.delete(1, tk.END)
-    entrada_endereco.insert(1, valores[2])
+    entrada_endereco.delete(0, tk.END)
+    entrada_endereco.insert(0, valores[2])
     entrada_endereco.focus()
     #Editar Cep
-    entrada_cep.delete(2, tk.END)
-    entrada_cep.insert(2, valores[3])
+    entrada_cep.delete(0, tk.END)
+    entrada_cep.insert(0, valores[3])
     entrada_cep.focus()
     atualizar_botoes()
 
@@ -112,6 +123,8 @@ def excluir():
         messagebox.showinfo("Sucesso", f"Registro {_id} excluído.")
         registro_atual_id = None
         entrada_nome.delete(0, tk.END)
+        entrada_endereco.delete(0, tk.END)
+        entrada_cep.delete(0, tk.END)
         atualizar_grade()
 
 def cancelar():
